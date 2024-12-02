@@ -7,19 +7,17 @@ with open("input.txt") as f:
         left.append(first)
         right.append(second)
 
-l_sorted = sorted(left)
-r_sorted = sorted(right)
+lSorted = sorted(left)
+rSorted = sorted(right)
 
-dist_sum = 0
-similarity_score = 0
+distSum = 0
+similarityScore = 0
 for i in range(len(left)):
-    dist_sum += abs(l_sorted[i]-r_sorted[i])
-    similarity_score += l_sorted[i] * r_sorted.count(l_sorted[i])
+    distSum += abs(lSorted[i]-rSorted[i])
+    similarityScore += lSorted[i] * rSorted.count(lSorted[i])
 
 # part one
-print(dist_sum)
+print(distSum)
 
 # part two
-print(similarity_score)
-
-
+print(similarityScore)
