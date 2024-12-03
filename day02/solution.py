@@ -20,10 +20,7 @@ def combos(levels):
     combos = []
 
     for i in range(len(levels)):
-        if i == 0:
-            combos.append(levels[-1:0] + levels[1:])
-        else:
-            combos.append(levels[0:i] + levels[i+1:])
+        combos.append(levels[:i] + levels[i+1:])
     
     return combos
 
