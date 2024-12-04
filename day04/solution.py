@@ -20,7 +20,7 @@ def next_in_direction(direction, row, col):
     
     return -1, -1
 
-def is_expected(table, row, col, expected):
+def is_char_at_pos(table, row, col, expected):
     if row < 0 or row >= len(table):
         return False
     
@@ -29,10 +29,8 @@ def is_expected(table, row, col, expected):
     
     return table[row][col] == expected
 
-    
-
 def xmas(table, row, col, expected, direction=None):
-    if not is_expected(table, row, col, expected):
+    if not is_char_at_pos(table, row, col, expected):
         return 0
     
     current = table[row][col]
@@ -52,12 +50,12 @@ def xmas(table, row, col, expected, direction=None):
     return count
 
 def mas(table, row, col):
-    if not (is_expected(table, row-1, col-1, "M") and is_expected(table, row+1, col+1, "S")) and \
-        not (is_expected(table, row-1, col-1, "S") and is_expected(table, row+1, col+1, "M")):
+    if not (is_char_at_pos(table, row-1, col-1, "M") and is_char_at_pos(table, row+1, col+1, "S")) and \
+        not (is_char_at_pos(table, row-1, col-1, "S") and is_char_at_pos(table, row+1, col+1, "M")):
         return 0
 
-    if not (is_expected(table, row-1, col+1, "M") and is_expected(table, row+1, col-1, "S")) and \
-        not (is_expected(table, row-1, col+1, "S") and is_expected(table, row+1, col-1, "M")):
+    if not (is_char_at_pos(table, row-1, col+1, "M") and is_char_at_pos(table, row+1, col-1, "S")) and \
+        not (is_char_at_pos(table, row-1, col+1, "S") and is_char_at_pos(table, row+1, col-1, "M")):
         return 0
     
     return 1
