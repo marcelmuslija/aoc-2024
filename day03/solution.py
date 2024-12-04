@@ -9,8 +9,8 @@ while "mul" in mem:
 
     # part two {
     prefix = mem[:mul_index]
-    dont_index = -1 if "don't()" not in prefix else prefix.rindex("don't()")
-    do_index = -1 if "do()" not in prefix else prefix.rindex("do()")
+    dont_index = prefix.rfind("don't()")
+    do_index = prefix.rfind("do()")
 
     if not mul_enabled and do_index > dont_index:
         mul_enabled = True
