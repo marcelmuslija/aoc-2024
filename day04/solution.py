@@ -9,7 +9,7 @@ directions = [
     "SOUTHEAST"
 ]
 
-def next_location(direction, row, col):
+def next_in_direction(direction, row, col):
     if direction == "NORTHWEST":
         return row-1, col-1
     if direction == "NORTH":
@@ -28,19 +28,23 @@ def next_location(direction, row, col):
         return row+1, col+1
     
     return -1, -1
+
+def is_expected(table, row, col, expected):
+    if row < 0 or row >= len(table):
+        return False
+    
+    if col < 0 or col >= len(table[row]):
+        return False
+    
+    return table[row][col] == expected
+
     
 
 def xmas(table, row, col, expected, direction=None):
-    if row < 0 or row >= len(table):
-        return 0
-    
-    if col < 0 or col >= len(table[row]):
+    if not is_expected(table, row, col, expected):
         return 0
     
     current = table[row][col]
-
-    if current != expected:
-        return 0
 
     if current == "S":
         return 1
@@ -48,20 +52,33 @@ def xmas(table, row, col, expected, direction=None):
     count = 0
     if current == "X":
         for d in directions:
-            next_row, next_col = next_location(d, row, col)
+            next_row, next_col = next_in_direction(d, row, col)
             count += xmas(table, next_row, next_col, "M", d)
     else:
-        next_row, next_col = next_location(direction, row, col)
+        next_row, next_col = next_in_direction(direction, row, col)
         count += xmas(table, next_row, next_col, "A" if current == "M" else "S", direction)
 
     return count
 
+def mas(table, row, col):
+    if not (is_expected(table, row-1, col-1, "M") and is_expected(table, row+1, col+1, "S")) and \
+        not (is_expected(table, row-1, col-1, "S") and is_expected(table, row+1, col+1, "M")):
+        return 0
+
+    if not (is_expected(table, row-1, col+1, "M") and is_expected(table, row+1, col-1, "S")) and \
+        not (is_expected(table, row-1, col+1, "S") and is_expected(table, row+1, col-1, "M")):
+        return 0
+    
+    return 1
+
 with open("input.txt") as f:
     table = f.read().splitlines()
 
-count = 0
+xmas_count, mas_count = 0, 0
 for row in range(len(table)):
     for col in range(len(table[row])):
-       count += xmas(table, row, col, "X")
+       xmas_count += xmas(table, row, col, "X")
+       if table[row][col] == "A":
+           mas_count += mas(table, row, col)
 
-print(count)
+print(xmas_count, mas_count)
