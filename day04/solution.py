@@ -1,30 +1,21 @@
-directions = [
-    "NORTHWEST",
-    "NORTH",
-    "NORTHEAST",
-    "WEST",
-    "EAST",
-    "SOUTHWEST",
-    "SOUTH",
-    "SOUTHEAST"
-]
+directions = ["NW", "N", "NE", "W", "E", "SW", "S", "SE"]
 
 def next_in_direction(direction, row, col):
-    if direction == "NORTHWEST":
+    if direction == "NW":
         return row-1, col-1
-    if direction == "NORTH":
+    if direction == "N":
         return row-1, col
-    if direction == "NORTHEAST":
+    if direction == "NE":
         return row-1, col+1
-    if direction == "WEST":
+    if direction == "W":
         return row, col-1
-    if direction == "EAST":
+    if direction == "E":
         return row, col+1
-    if direction == "SOUTHWEST":
+    if direction == "SW":
         return row+1, col-1
-    if direction == "SOUTH":
+    if direction == "S":
         return row+1, col
-    if direction == "SOUTHEAST":
+    if direction == "SE":
         return row+1, col+1
     
     return -1, -1
@@ -72,13 +63,13 @@ def mas(table, row, col):
     return 1
 
 with open("input.txt") as f:
-    table = f.read().splitlines()
+    matrix = f.read().splitlines()
 
 xmas_count, mas_count = 0, 0
-for row in range(len(table)):
-    for col in range(len(table[row])):
-       xmas_count += xmas(table, row, col, "X")
-       if table[row][col] == "A":
-           mas_count += mas(table, row, col)
+for row in range(len(matrix)):
+    for col in range(len(matrix[row])):
+       xmas_count += xmas(matrix, row, col, "X")
+       if matrix[row][col] == "A":
+           mas_count += mas(matrix, row, col)
 
 print(xmas_count, mas_count)
