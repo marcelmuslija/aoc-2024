@@ -30,7 +30,7 @@ def next_location(direction, row, col):
     return -1, -1
     
 
-def xmas(table, row, col, next_letter, direction=None):
+def xmas(table, row, col, expected, direction=None):
     if row < 0 or row >= len(table):
         return 0
     
@@ -39,7 +39,7 @@ def xmas(table, row, col, next_letter, direction=None):
     
     current = table[row][col]
 
-    if current != next_letter:
+    if current != expected:
         return 0
 
     if current == "S":
