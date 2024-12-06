@@ -31,9 +31,9 @@ class Map:
             
         raise ValueError("Guard not on map")
     
-    def mark(self, x, y, c):
+    def mark(self, x, y, symbol):
         row = list(self._map[x])
-        row[y] = c
+        row[y] = symbol
         self._map[x] = "".join(row)
 
 class Guard:
