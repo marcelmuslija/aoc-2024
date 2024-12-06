@@ -109,10 +109,11 @@ if __name__ == "__main__":
     print("".join(patroled_map).count('X'))
 
     """ 
+    Part 2
         Use the patroled map to see where the guard moves when no obstacles are added.
         When you find a position the guard visited (exclude the starting position):
             Copy the original map, and put an obstacle at that position.
-            Create a new guard at the starting position and patrol the map copy.
+            Create a new guard at the starting position and patrol the map copy (looped map).
             Once the patrol is over, check if it ended because he got stuck in a loop.
     """
     loop_counts = 0
@@ -120,8 +121,8 @@ if __name__ == "__main__":
         for y in range(patroled_map.width):
             if patroled_map[x][y] == "X" and (x, y) != start:
                 looped_map = copy.deepcopy(original_map)
-                guard = Guard(*start)
                 looped_map.mark(x, y, "#")
+                guard = Guard(*start)
                 guard.patrol(looped_map)
                 if guard.is_in_loop():
                     loop_counts += 1
