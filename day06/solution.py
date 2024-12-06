@@ -112,7 +112,7 @@ if __name__ == "__main__":
         Use the patroled map to see where the guard moves when no obstacles are added.
         When you find a position the guard visited (exclude the starting position):
             Copy the original map, and put an obstacle at that position.
-            Have the guard patrol the map copy.
+            Create a new guard at the starting position and patrol the map copy.
             Once the patrol is over, check if it ended because he got stuck in a loop.
     """
     loop_counts = 0
