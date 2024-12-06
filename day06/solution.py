@@ -64,6 +64,8 @@ class Guard:
     
     def is_in_loop(self):
         pos = self.x, self.y
+
+        # guard is in previous position and moving in same direction
         return self.direction == self.moves.get(pos, "")
 
     def _next_pos(self):
@@ -103,8 +105,16 @@ if __name__ == "__main__":
 
     guard.patrol(patroled_map)
 
+    # part one solution
     print("".join(patroled_map).count('X'))
 
+    """ 
+        Use the patroled map to see where the guard moves when no obstacles are added.
+        When you find a position the guard visited (exclude the starting position):
+            Copy the original map, and put an obstacle at that position.
+            Have the guard patrol the map copy.
+            Once the patrol is over, check if it ended because he got stuck in a loop.
+    """
     loop_counts = 0
     for x in range(patroled_map.height):
         for y in range(patroled_map.width):
