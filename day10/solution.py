@@ -18,16 +18,18 @@ def trail(map, i, j, height, reached_peaks):
         trail(map, i, j+1, height+1, reached_peaks)
 
 
-with open("input.txt") as f:
-    map = [[int(c) for c in line] for line in f.read().splitlines()]
+if __name__ == "__main__":
 
-score = 0
-rating = 0
-for i in range(len(map)):
-    for j in range(len(map)):
-        reached_peaks = set()
-        rating += trail(map, i, j, 0, reached_peaks)
-        score += len(reached_peaks)
+    with open("input.txt") as f:
+        map = [[int(c) for c in line] for line in f.read().splitlines()]
 
-print(rating)
-print(score)
+    score = 0
+    rating = 0
+    for i in range(len(map)):
+        for j in range(len(map)):
+            reached_peaks = set()
+            rating += trail(map, i, j, 0, reached_peaks)
+            score += len(reached_peaks)
+
+    print(rating)
+    print(score)
